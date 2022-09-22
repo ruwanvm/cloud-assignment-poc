@@ -14,3 +14,6 @@
 * Schedule the cronjob resource to run on every minute
 
 * Refer the `cron.yml` in here
+
+
+> Assume that PHP web application is running and, we are using same Web application image to schedule the cron
