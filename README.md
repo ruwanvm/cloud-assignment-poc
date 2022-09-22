@@ -1,6 +1,6 @@
 # cloud-assignment-poc
 
-Task 1
+## Task 1
 
 Web application required to execute CLI script as a scheduler task. This scheduler task executes recurring N minutes. Assume that you have the `src` folder in the given location and the PHP CLI script located in “src/cli/cron.php”.This CLI script may need to be executed in high availability and highly scalable environment.
 
@@ -8,7 +8,7 @@ Web application required to execute CLI script as a scheduler task. This schedul
     2. How do you develop a Dockerfile to execute the CLI script? ( Assume that you can use `php:cli` as the base image)
     3. How do you automate the above docker container to run each minute?
 
-Task 2
+## Task 2
 
 Infrastructure team needs to spin up a Jenkins instance on the AWS cloud infrastructure to run cloud CI/CD pipelines.
 
@@ -17,9 +17,10 @@ Infrastructure team needs to spin up a Jenkins instance on the AWS cloud infrast
     3. How do you improve your terraform module to grant SSH access and HTTP access?
     4. What's your approach to automating Jenkins and relevant dependencies installation on the EC2 instance?
 
-Task 3
+## Task 3
 
 Web application released as a docker image, and it requires nginx,pgsql as dependency containers.
+
     1. How do you deploy the above three containers in the Kubernetes cluster?
     2. If we need to scale the nginx container based on demand how do you achieve it?
     3. How you are going to keep Pgsql DB credentials in k8 cluster?
