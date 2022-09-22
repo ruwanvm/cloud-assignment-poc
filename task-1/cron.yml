@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cron-php-cli-test
+spec:
+  # Cronjob run every minute
+  schedule: "* * * * *"
+  # Do not execute if already running pod
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: cron-php-cli-test
+            image: php-cli:latest
+            imagePullPolicy: Always
+            command:
+              - php
+            args: 
+              - ./cron.php
+          restartPolicy: Never
