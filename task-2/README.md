@@ -16,7 +16,7 @@
 * Refer the Terraform IaC in the `infrastructure` directory and Ansible playbook on `configuration` directory
 ----------------------------------
 ## Grant SSH and HTTP access
-* Security Group is added to EC2 and allow SSH & HTTP access
+* Security Group is added to EC2 and allow SSH & HTTP access to local workstation IP
 * Wait for SSH to be ready using `remote-exec` terraform `provisioner`
 * Terraform will output the jenkins URL
 ----------------------------------
