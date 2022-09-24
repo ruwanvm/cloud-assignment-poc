@@ -1,31 +1,35 @@
 ## How to Deploy
-* nginx - as a deployment behind a service and expose to public using ingress
-> nginx ingress-controller is already deployed
-* webapp - as a deployment behind a service
-> https://www.stackovercloud.com/2019/08/08/how-to-deploy-a-php-application-with-kubernetes-on-ubuntu-18-04/
-* pgsql - as a statefulset using persistance storage behind a service
-> https://www.eksworkshop.com/intermediate/200_migrate_to_eks/deploy-counter-db-in-eks/
-
+* nginx - As a deployment behind a service and expose publicly using ingress
+>* Assume nginx ingress-controller is already deployed and host is `webapp.totara.com`
+>* Refer `nginx-deployment.yml` and `nginx-service.yml` definitions
+* webapp - As a deployment behind a service (Assume PHP application)
+>* Refer `php-deployment.yml` and `php-service.yml` definitions
+* pgsql - As a statefulset using persistence volume behind a service
+>* Refer `persistent-volume.yml`, `pgsql-deployment.yml` and `pgsql-service.yml` definitions
 ----------------------------------
 ## Scale the nginx container
 * Deploy Horizontal Pod Autoscaler for nginx deployment based on the demand (metric)
-> Metrics Server is already deployed
-
-> https://cloud.google.com/kubernetes-engine/docs/how-to/horizontal-pod-autoscaling#kubectl-apply
+> Assume `targetCPUUtilizationPercentage` as the Metric. We can use complex metrics with Metrics Server deployment
 ----------------------------------
 ## Keep Pgsql DB credentials
-* Pgsql creadentials are stored in a Kubernetes secret
-> https://medium.com/@xcoulon/managing-pod-configuration-using-configmaps-and-secrets-in-kubernetes-93a2de9449be
+* Pgsql credentials are stored in a Kubernetes secret (refer )
+>* Refer `pgsql-secret.yml` definition for secret deployment
+>* Secret values are exposed as Environment variables to `php` and `pgsql` deployments
+>```
+>          envFrom:
+>           - secretRef:
+>               name: pgsql-db-credentials
+>```
 ----------------------------------
 ## Upgrade with zero downtime
 * Create helm chart to package the Kubernetes configurations
-* Deploy using CI/CD pipeline (`GitHub actions` used here)
-* Use `Rolling updates` to acheive zero downtime deployment
+* Deploy using CI/CD pipeline (With unit tests and e2e tests)
+* Use `Rolling updates` to achieve zero downtime deployment
+>```
+>  strategy:
+>    type: RollingUpdate
+>    rollingUpdate:
+>      maxSurge: 25%
+>      maxUnavailable: 25%
+>```
 ----------------------------------
-
-https://www.stackovercloud.com/2019/08/08/how-to-deploy-a-php-application-with-kubernetes-on-ubuntu-18-04/
-
-https://devopscube.com/deploy-postgresql-statefulset/
-
-https://www.eksworkshop.com/intermediate/200_migrate_to_eks/deploy-counter-db-in-eks/
-

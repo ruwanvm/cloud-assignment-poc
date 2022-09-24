@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php
+  labels:
+    app: php
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: php
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  template:
+    metadata:
+      name: php
+      labels:
+        app: php
+    spec:
+      containers:
+        - name: php
+          image: php:7.4.23-fpm-alpine3.13
+          imagePullPolicy: Always
+          envFrom:
+            - secretRef:
+                name: pgsql-db-credentials
+          ports:
+            - containerPort: 9000
