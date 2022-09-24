@@ -1,6 +1,6 @@
 ## How to Deploy
 * nginx - As a deployment behind a service and expose publicly using ingress
->* Assume nginx ingress-controller is already deployed and host is `webapp.totara.com`
+>* Assume nginx ingress-controller is already deployed and host is `webapp.ruwanvm.com`
 >* Refer `nginx-deployment.yml` and `nginx-service.yml` definitions
 * webapp - As a deployment behind a service (Assume PHP application)
 >* Refer `php-deployment.yml` and `php-service.yml` definitions
@@ -12,7 +12,7 @@
 > Assume `targetCPUUtilizationPercentage` as the Metric. We can use complex metrics with Metrics Server deployment
 ----------------------------------
 ## Keep Pgsql DB credentials
-* Pgsql credentials are stored in a Kubernetes secret (refer )
+* Pgsql credentials are stored in a Kubernetes secret
 >* Refer `pgsql-secret.yml` definition for secret deployment
 >* Secret values are exposed as Environment variables to `php` and `pgsql` deployments
 >```

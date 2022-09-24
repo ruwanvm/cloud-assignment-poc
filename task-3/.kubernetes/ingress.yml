@@ -8,7 +8,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: webapp.totara.com
+    - host: webapp.ruwanvm.com
       http:
         paths:
           - path: /
